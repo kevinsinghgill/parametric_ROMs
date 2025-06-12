@@ -1,0 +1,82 @@
+# ------------------
+# PATH CONFIGURATION
+# ------------------
+# Base directories for data and outputs. The scripts will create subdirectories as needed.
+data_dir: "data"      # Base directory for all data
+output_dir: "outputs/my_first_run" # A unique name for this run's outputs
+
+# Specific subdirectories (relative to data_dir)
+raw_data_dir: "raw"
+processed_data_dir: "processed"
+
+# Parameter files (place these in data_dir)
+training_params_file: "training_parameters.txt"
+testing_params_file: "testing_parameters.txt"
+
+# ---------------------
+# DATA & SAMPLING PARAMS
+# ---------------------
+# Indices for training and testing simulations (e.g., ETG_sim_{idx})
+training_indices: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28]
+testing_indices: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+
+# Preprocessing parameters (for 0_preprocess_data.py)
+# This section is specific to your data format.
+# Users with different data can modify the preprocessing script.
+data_shape: [3, 168, 32, 8] # Original shape (e.g., n_kx, n_z, n_v, n_mu)
+n_times_list: [7360, 8520, ...] # List of timesteps for each raw file
+
+# Snapshot sampling for ROM training (for 1_build_basis.py and 2_fit_roms.py)
+start_time_percentage: 0.3 # Start sampling after this fraction of the simulation
+num_snapshots_fit: 3310    # Number of snapshots to select after the start time
+subsample_rate: 10         # Subsample every Nth snapshot
+
+# ---------------------
+# ROM & MODELING PARAMS
+# ---------------------
+rom_rank: 4  # The desired rank 'r' of the reduced order model
+
+# --------------------------
+# PARAMETER SPACE & NORMALIZATION
+# --------------------------
+param_dim: 6      # Number of parameters in the parametric space
+param_columns: [1, 2, 3, 4, 5, 6] # Columns from the log file
+
+# Bounds [min, max] for each physical parameter.
+# These are used to normalize parameters to [0, 1] and back.
+# The order MUST match the order in param_columns.
+param_bounds:
+  # tau
+  - [1.15, 1.73]
+  # q0
+  - [3.62, 5.45]
+  # omn
+  - [70.0, 106.0]
+  # omt
+  - [148.0, 224.0]
+  # Tref
+  - [0.35, 0.44]
+  # nref
+  - [4.04, 4.95]
+
+# How to obtain test points for interpolation.
+testing_setup:
+  # Options: 'generate' or 'load'.
+  # 'generate': Creates random points in [0,1]^dim using a fixed seed.
+  #             The physical parameters in `testing_params_file` are ignored,
+  #             but the ground truth values (e.g., growth_rate) are still used for validation.
+  # 'load':     Loads physical parameters from the `testing_params_file` and normalizes them.
+  mode: 'generate'
+  random_seed: 5126565
+
+# --------------------------
+# SPARSE GRID INTERPOLATION
+# --------------------------
+sg_level: 3       # Sparse grid level
+level_to_nodes: 1 # For Clenshaw-Curtis nodes
+
+# --------------------------
+# ANALYSIS & PLOTTING
+# --------------------------
+# For use with analysis scripts
+plot_test_idx: 1   # Which test case to generate a plot for
