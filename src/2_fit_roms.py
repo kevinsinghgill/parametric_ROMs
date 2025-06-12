@@ -54,18 +54,14 @@ def main(config_path):
             init_alpha=init_alpha,
         )
         dmd_model.fit(X_sim, t=t_sim)
-
-        # The Atilde operator is the reduced-order operator
-        Atilde = dmd_model.atilde
         
-        # Eigen-decomposition of Atilde gives the reduced-order dynamics
-        # Note: dmd_model.eigs are eigenvalues of the discrete-time operator exp(Atilde*dt)
-        # We want the eigenvalues of the continuous-time operator, Atilde.
-        eigvals_reduced, eigvecs_reduced = np.linalg.eig(Atilde)
+        eigvals_reduced = dmd_model.eigs
+        eigvecs_reduced = V_global.conj().T @ dmd_model.modes # shape (r, r)
+        amplitudes = dmd_model._b # initial conditions
 
         eigenvalues_list.append(eigvals_reduced)
         eigenvectors_list.append(eigvecs_reduced)
-        amplitudes_list.append(dmd_model.amplitudes)
+        amplitudes_list.append(amplitudes)
 
     # 4. Save the spectral data
     np.save(output_path / "global_basis.npy", V_global) # Final basis used
