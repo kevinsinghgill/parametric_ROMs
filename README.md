@@ -87,7 +87,7 @@ All settings are controlled by `config.yaml`. Review and edit this file before r
     -   `mode: 'generate'`: For exact reproducibility. Ignores the physical parameter values in your test log file and generates random points in `[0, 1]` using a fixed seed.
     -   `mode: 'load'`: Loads physical parameters directly from your test log file and normalizes them.
 
-**Example `test_parameter_log.txt` format:**
+**Example `testing_parameters.txt` format:**
 The last two columns are assumed to be ground-truth values for validation.
 ```
 # idx  tau      q0       ...  growth_rate  freq
