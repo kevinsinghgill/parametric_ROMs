@@ -49,7 +49,7 @@ def main(config_path):
         # Now, overwrite the internal state with our interpolated values.
         # This is the core of the parametric prediction.
         dmd.operator._Atilde = Atilde
-        dmd.operator._eigenvalues = np.exp(eigvals) # pydmd expects discrete-time eigs
+        dmd.operator._eigenvalues = eigvals
         dmd.operator._modes = modes_full
         dmd._amplitudes = amps
         
