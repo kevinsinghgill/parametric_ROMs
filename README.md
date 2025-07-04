@@ -142,18 +142,3 @@ The script `src/0_preprocess_data.py` is specific to a binary data format. To us
 1.  Modify the `read_gyrokinetics_binary` function inside `src/0_preprocess_data.py` to read your file format.
 2.  Ensure your function returns two NumPy arrays: a `data_matrix` of shape `(N, T)` where `N` is the flattened state dimension and `T` is the number of time steps, and a `times` array of shape `(T,)`.
 3.  The `src/analysis/plot_phase_space.py` script is specific to 4D data. You will need to adapt the data loading and reshaping portion for your problem's dimensionality.
-
-## Citation
-
-If you use this code in your research, please cite our paper:
-
-```bibtex
-@article{your_paper,
-  title={Your Paper Title},
-  author={You, et al.},
-  journal={Journal Name},
-  year={2024},
-  ...
-}
-```
-```
