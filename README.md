@@ -1,6 +1,6 @@
 # Parametric Reduced-Order Models
 
-This repository contains the source code for building and evaluating parametric Reduced-Order Models (ROMs) as described in [Paper Title Here](link-to-paper). The method leverages Proper Orthogonal Decomposition (POD) to find a global basis, fits local optimized Dynamic Mode Decomposition (DMD) models at various training parameter points, and uses Sparse Grid interpolation to create a continuous parametric ROM that can make predictions at new, unseen parameter points.
+This repository contains the source code for building and evaluating parametric Reduced-Order Models (ROMs) as described in [Real-time prediction of plasma instabilities with sparse-grid-accelerated optimized dynamic mode decomposition](). The method leverages Proper Orthogonal Decomposition (POD) to find a global basis, fits local optimized Dynamic Mode Decomposition (DMD) models at various training parameter points, and uses Sparse Grid interpolation to create a continuous parametric ROM that can make predictions at new, unseen parameter points.
 
 This implementation is designed to be general but includes specific preprocessing steps for data from gyrokinetic simulations and an analysis script for visualizing 4D phase-space data, both of which can be adapted by the user.
 
